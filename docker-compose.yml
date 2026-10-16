@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      SERVER_PORT: 8080
+
+  # Optional Redis profile (not required — app uses in-process Caffeine cache).
+  # See README "Switching to Redis" for the code changes needed.
+  # Run with: docker compose --profile redis up
+  redis:
+    image: redis:7-alpine
+    profiles: ["redis"]
+    ports:
+      - "6379:6379"
